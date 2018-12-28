@@ -1,6 +1,7 @@
 package com.amal.devopsaws.config;
 
 
+import com.amal.devopsaws.backend.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -17,7 +18,11 @@ import java.util.List;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private UserSecurityService userSecurityService;
+
+    @Autowired
     private Environment env;
+
 
     /** Public URLs. */
     private static final String[] PUBLIC_MATCHERS = {
@@ -32,17 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/console/**"
     };
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
 
         List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
         if (activeProfiles.contains("dev")) {
             http.csrf().disable();
             http.headers().frameOptions().disable();
         }
-
 
         http
                 .authorizeRequests()
@@ -58,10 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-
-
-                .inMemoryAuthentication()
-                .withUser("user").password("{noop}password")
-                .roles("USER");
+                .userDetailsService(userSecurityService);
     }
 }

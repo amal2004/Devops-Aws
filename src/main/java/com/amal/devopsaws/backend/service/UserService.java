@@ -32,7 +32,7 @@ public class UserService {
 
         Plan plan = new Plan(plansEnum);
         // It makes sure the plans exist in the database
-        if (!planRepository.existsById(plansEnum.getId())) {
+        if (!planRepository.exists(plansEnum.getId())) {
             plan = planRepository.save(plan);
         }
 

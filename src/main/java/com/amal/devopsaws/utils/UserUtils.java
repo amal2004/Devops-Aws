@@ -2,9 +2,9 @@ package com.amal.devopsaws.utils;
 
 import com.amal.devopsaws.backend.persistence.domain.backend.User;
 
-public class UsersUtils {
+public class UserUtils {
 
-    private UsersUtils(){
+    private UserUtils(){
         throw new AssertionError("Non instantiable");
     }
 
@@ -17,7 +17,7 @@ public class UsersUtils {
 
         User user = new User();
         user.setUsername("basicUser");
-        user.setPassword("secret");
+        user.setPassword("password");
         user.setEmail("me@example.com");
         user.setFirstName("firstName");
         user.setLastName("lastName");
@@ -29,6 +29,5 @@ public class UsersUtils {
 
         return user;
     }
-
 
 }
