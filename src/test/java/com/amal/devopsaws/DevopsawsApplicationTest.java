@@ -21,7 +21,7 @@ public class DevopsawsApplicationTest {
 
     @Test
     public void testMessageByLocaleService() throws Exception {
-        String expectedResult = "Bootstrap starter template1";
+        String expectedResult = "Bootstrap starter template";
         String messageId = "index.main.callout";
         String actual = i18NService.getMessage(messageId);
         Assert.assertEquals("The actual and expected Strings don't match", expectedResult, actual);
